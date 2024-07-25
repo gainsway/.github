@@ -1,0 +1,15 @@
+{
+    "LABEL": {
+        "name": "pr-title-bad-format",
+        "color": "FF0000"
+      },
+    "CHECKS": {
+      "regexp": "^(fix|feat|chore|refactor|ci|docs|test):\\s[^A-Z]+$",
+      "ignoreLabels" : ["dont-check-PRs-with-this-label", "meta"]
+    },
+    "MESSAGES": {
+      "success": "Success",
+      "failure": "Failure",
+      "notice": ""
+    }
+  }

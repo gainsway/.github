@@ -1,0 +1,7 @@
+{
+  "name": "PullRequest checker Organization Workflow",
+  "description": "PullRequest checker Organization starter workflow.",
+  "categories": [
+      "code-review"
+  ]
+}
