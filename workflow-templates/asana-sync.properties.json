@@ -1,0 +1,7 @@
+{
+  "name": "Asana - GitHub task sync Workflow",
+  "description": "Workflow to sync Asana project and GitHub pull requests",
+  "categories": [
+      "Automation"
+  ]
+}

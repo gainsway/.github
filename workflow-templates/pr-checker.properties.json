@@ -1,6 +1,6 @@
 {
-  "name": "PullRequest checker Organization Workflow",
-  "description": "PullRequest checker Organization starter workflow.",
+  "name": "Pull Request checker Workflow",
+  "description": "Workflow to validate that pr follow gainsway conventions",
   "categories": [
       "code-review"
   ]
