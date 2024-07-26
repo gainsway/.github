@@ -4,7 +4,7 @@
         "color": "FF0000"
       },
     "CHECKS": {
-      "regexp": "^(fix|feat|chore|refactor|ci|docs|test)(\\([^A-Z]+\\))?:\\s[^A-Z]+$",
+      "regexp": "^(fix|feat|chore|refactor|ci|docs|test)(\\([^A-Z]+\\))?:\\s[^A-Z].*$",
       "ignoreLabels" : ["dont-check-PRs-with-this-label", "meta"]
     },
     "MESSAGES": {
