@@ -1,4 +1,4 @@
-name: "PR Title Checker"
+name: pr-checker
 on:
   pull_request_target:
     types:
@@ -11,6 +11,9 @@ on:
 jobs:
   check:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
     steps:
       - uses: thehanimo/pr-title-checker@v1.4.2
         with:
@@ -19,4 +22,3 @@ jobs:
           github_configuration_owner: gainsway
           github_configuration_repo: .github
           github_configuration_path: .github/pr-title-checker-config.json
-          github_configuration_token: ${{ secrets.GITHUB_TOKEN }} #(optional. defaults to GITHUB_TOKEN)
