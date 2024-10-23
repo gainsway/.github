@@ -11,6 +11,6 @@
 🧙 Remember, you can do mighty things with the power of [Markdown](https://docs.github.com/github/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax)
 -->
 
-## Re-imagine the world of investing.
+#### Re-imagine the world of investing.
 
 We’re looking at new ways to think about long-term investing and adding value to investors.
