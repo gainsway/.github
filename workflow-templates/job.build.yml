@@ -1,0 +1,63 @@
+name: Build Docker Image with Kaniko
+
+on:
+  workflow_call:
+    inputs:
+      aws_region:
+        required: true
+        type: string
+      service:
+        required: true
+        type: string
+      image_tag:
+        required: true
+        type: string
+      dockerfile:
+        required: false
+        type: string
+        default: Dockerfile
+      build_args:
+        required: false
+        type: string
+      context:
+        required: false
+        type: string
+        default: "."
+      cache:
+        required: false
+        type: boolean
+        default: false
+        
+jobs:
+  build-image-kaniko:
+    name: Docker Build
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      packages: read
+
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-region: ${{ inputs.aws_region }}
+
+      - name: Login to Amazon ECR
+        id: ecr
+        uses: aws-actions/amazon-ecr-login@v2
+
+      - name: Kaniko Build & Push
+        uses: int128/kaniko-action@v1
+        with:
+          verbosity: info
+          context: ${{ inputs.context }}
+          push: true
+          tags: ${{ steps.ecr.outputs.registry }}/${{ inputs.service }}:${{ inputs.image_tag }}
+          file: ${{ inputs.dockerfile }}
+          build-args: ${{ inputs.build_args }}
+          cache: ${{ inputs.cache }}
+          cache-repository: ${{ steps.ecr.outputs.registry }}/${{ inputs.service }}

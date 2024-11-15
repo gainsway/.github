@@ -1,0 +1,68 @@
+name: Update Image Tag in Config Repository
+
+on:
+  workflow_call:
+    inputs:
+      image_tag:
+        required: true
+        type: string
+      aws_region:
+        required: true
+        type: string
+      environment:
+        required: true
+        type: string
+      service:
+        required: true
+        type: string
+      namespace:
+        required: false
+        type: string
+        default: "liquid"
+      config_repo:
+        required: false
+        type: string
+        default: "gainsway/cluster-workloads"
+
+jobs:
+  push:
+    runs-on: ubuntu-latest
+    environment: ${{ inputs.environment }}
+    env:
+      values_path: "environments/liquid/${{ inputs.aws_region }}/${{ inputs.environment }}/values.yaml"
+    permissions:
+      contents: read
+      packages: read
+
+    steps:
+      - name: Display inputs
+        run: |
+          echo "Image Tag: ${{ inputs.image_tag }}"
+          echo "aws_region: ${{ inputs.aws_region }}"
+          echo "environment: ${{ inputs.environment }}"
+          echo "namespace": ${{ inputs.namespace }}
+          echo "service: ${{ inputs.service }}"
+
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+
+      - name: Checkout Config repo
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ inputs.config_repo }}
+          path: ./config
+
+      - name: Update Image
+        run: |
+          cd config/${{ inputs.namespace }}/${{ inputs.service }}
+          ls -la
+          git config --global user.email "github-ci@gainsway.com"
+          git config --global user.name "Github Actions (bot)"
+          if [ -d "${{ env.values_path }}" ]; then
+            echo "Environment doesn't exist"
+            exit 1;
+          fi
+          echo "Image tag is ${{ inputs.image_tag }}"
+          yq e -i ".image.tag = \"${{ inputs.image_tag }}\"" "${{ env.values_path }}"
+          git commit -am "Update Image for ${{ inputs.service }}, ${{ inputs.aws_region }}/${{ inputs.environment }}"
+          git push
