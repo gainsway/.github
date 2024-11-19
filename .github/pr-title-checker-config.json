@@ -9,7 +9,7 @@
     },
     "MESSAGES": {
       "success": "Success",
-      "failure": "PR title must be in the format of `<type>[optional scope]: <description>` following the conventional commit framework. Example: `feat(core): add new feature`",
+      "failure": "PR title must be in the format of `<type>[optional scope]: <description>` following the conventional commit framework (lowercase only). Example: `feat(core): add new feature`",
       "notice": ""
     }
   }
