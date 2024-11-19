@@ -9,7 +9,7 @@
     },
     "MESSAGES": {
       "success": "Success",
-      "failure": "Failure",
+      "failure": "PR title must be in the format of `<type>[optional scope]: <description>`. Example: `feat(core): add new feature`",
       "notice": ""
     }
   }
